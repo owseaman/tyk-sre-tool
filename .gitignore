@@ -36,3 +36,6 @@ kubeconfig
 # Local development
 *.log
 .DS_Store
+
+# Developement notes
+SideNotes.md
