@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "k8s-sre-tool.fullname" . }}
+  labels:
+    {{- include "k8s-sre-tool.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "k8s-sre-tool.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "k8s-sre-tool.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ include "k8s-sre-tool.serviceAccountName" . }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["python"]
+          args: ["main.py", "--address", ":8080"]  # Remove kubeconfig argument
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

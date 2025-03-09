@@ -1,0 +1,14 @@
+apiVersion: v2
+name: k8s-sre-tool
+description: Kubernetes SRE Tool for monitoring and managing cluster resources
+version: 0.1.0
+appVersion: "1.0.0"
+type: application
+keywords:
+  - kubernetes
+  - monitoring
+  - sre
+maintainers:
+  - name: Emmanuel Owoeye
+    email: esowoeye@gmail.com
+home: https://github.com/owseaman/k8s-sre-tool

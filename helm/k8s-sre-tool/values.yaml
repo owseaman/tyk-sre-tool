@@ -1,0 +1,48 @@
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: "tyk-sre-tool"
+
+namespace: monitoring
+
+
+################# Uncomment below for production #################
+# image:
+#   repository: ghcr.io/tykTechnologies/k8s-sre-tool
+#   # Use GitHub SHA from workflow
+#   tag: "${GITHUB_SHA}"
+#   pullPolicy: Always
+
+################# For local testing #################
+image:
+  repository: k8s-sre-tool
+  tag: latest
+  pullPolicy: Never
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "k8s-sre-tool"
+
+rbac:
+  create: true
+  rules:
+    - apiGroups: ["apps"]
+      resources: ["deployments"]
+      verbs: ["get", "list", "watch"]
+    - apiGroups: ["networking.k8s.io"]
+      resources: ["networkpolicies"]
+      verbs: ["get", "list", "create", "delete"]

@@ -45,3 +45,35 @@ To execute unit tests:
 ```
 python3 tests.py -v
 ```
+
+# Kubernetes SRE Monitoring Tool
+
+## Overview
+A tool for monitoring and managing Kubernetes cluster health and security.
+
+## Features
+- Deployment health monitoring
+- Network policy management
+- Kubernetes API server status checking
+
+## Installation
+
+### Using Helm
+```bash
+helm install sre-tool helm/k8s-sre-tool --namespace monitoring
+```
+
+### Local Development
+```bash
+# Build Docker image
+docker build -t k8s-sre-tool:latest .
+
+# Run locally
+docker run -p 8080:8080 -v ~/.kube/config:/app/.kube/config:ro k8s-sre-tool:latest
+```
+
+## Testing
+```bash
+python -m pytest tests/
+```
+

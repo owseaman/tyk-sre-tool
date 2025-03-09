@@ -2,4 +2,37 @@
 .venv
 __pycache__
 
-tyk-sre-assignment
+# tyk-sre-assignment
+
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+eggs/
+*.egg-info/
+
+# Virtual Environment
+venv/
+.env
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Helm
+charts/*.tgz
+
+# Kubernetes
+kubeconfig
+.kube/
+
+# Local development
+*.log
+.DS_Store
