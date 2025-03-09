@@ -1,11 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: k8s-sre-tool
+  name: {{ include "k8s-sre-tool.fullname" . }}
+  labels:
+    {{- include "k8s-sre-tool.labels" . | nindent 4 }}
 spec:
-  type: ClusterIP
+  type: {{ .Values.service.type }}
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: TCP
+      name: http
   selector:
-    app: k8s-sre-tool
+    {{- include "k8s-sre-tool.selectorLabels" . | nindent 4 }}
