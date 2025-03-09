@@ -46,7 +46,7 @@ To execute unit tests:
 python3 tests.py -v
 ```
 
-# Kubernetes SRE Monitoring Tool (Python)
+## Kubernetes SRE Monitoring Tool (Python) - WIP
 
 ## Overview
 A tool for monitoring and managing Kubernetes cluster health and security.
@@ -58,8 +58,10 @@ A tool for monitoring and managing Kubernetes cluster health and security.
 
 ## Installation
 
-# Create namespace first
+### Create namespace first
+```
 kubectl create namespace monitoring
+```
 
 ### Using Helm
 ```bash
