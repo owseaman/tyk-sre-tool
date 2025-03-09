@@ -31,3 +31,33 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository_owner }}/tyk-sre-tool:${{ github.sha }}
             ghcr.io/${{ github.repository_owner }}/tyk-sre-tool:latest
+
+################### COMMENT OUT BELOW FOR AUTO DEPLOYMENT ###################
+########### Add new repository secret:
+############ Name: KUBE_CONFIG
+###########  Value: Your base64 encoded kubeconfig file
+
+
+      # - name: Set up Kubernetes tools
+      #   if: github.event_name != 'pull_request'
+      #   uses: azure/setup-kubectl@v3
+
+      # - name: Set up Helm
+      #   if: github.event_name != 'pull_request'
+      #   uses: azure/setup-helm@v3
+
+      # - name: Configure Kubernetes context
+      #   if: github.event_name != 'pull_request'
+      #   uses: azure/k8s-set-context@v3
+      #   with:
+      #     method: kubeconfig
+      #     kubeconfig: ${{ secrets.KUBE_CONFIG }}
+
+      # - name: Deploy to Kubernetes
+      #   if: github.event_name != 'pull_request'
+      #   run: |
+      #     helm upgrade --install tyk-sre-tool helm/k8s-sre-tool \
+      #       --namespace monitoring \
+      #       --create-namespace \
+      #       --set image.tag=${{ github.sha }} \
+      #       --wait --timeout 5m
