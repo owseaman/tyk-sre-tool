@@ -7,17 +7,17 @@ namespace: monitoring
 
 
 ################# Uncomment below for production #################
-# image:
-#   repository: ghcr.io/tykTechnologies/k8s-sre-tool
-#   # Use GitHub SHA from workflow
-#   tag: "${GITHUB_SHA}"
-#   pullPolicy: Always
+image:
+  repository: ghcr.io/owseaman/tyk-sre-tool
+  # Use GitHub SHA from workflow or latest for production
+  tag: latest
+  pullPolicy: Always
 
 ################# For local testing #################
-image:
-  repository: k8s-sre-tool
-  tag: latest
-  pullPolicy: Never
+# image:
+#   repository: k8s-sre-tool
+#   tag: latest
+#   pullPolicy: Never
 
 service:
   type: ClusterIP
