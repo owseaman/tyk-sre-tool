@@ -11,6 +11,8 @@ class AppHandler(BaseHTTPRequestHandler):
             self.healthz()
         elif self.path == "/api/deployments/health":
             self.deployments_health()  # New endpoint for deployment health    
+        elif self.path == "/api/status":  # New endpoint
+            self.api_status()
         else:
             self.send_error(404)
 
